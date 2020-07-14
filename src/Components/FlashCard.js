@@ -3,8 +3,8 @@ import "./FlashCard.css";
 
 export default function FlashCard(props) {
   return (
-    <div>
-      <h1>{props.question}</h1>
+    <div className="flashcard">
+      <h1 className="flashcard-txt">{props.question}</h1>
     </div>
   );
 }
