@@ -1,0 +1,19 @@
+.create-flashcard-input {
+  margin-top: 3%;
+  width: 400px;
+  height: 40px;
+  border: none;
+}
+
+.done-btn {
+  height: 42px;
+  width: 70px;
+  background-color: rgb(163, 250, 32);
+  border: none;
+  transition: ease-in 0.1s;
+}
+
+.done-btn:hover {
+  color: white;
+  background-color: rgb(190, 190, 190);
+}
