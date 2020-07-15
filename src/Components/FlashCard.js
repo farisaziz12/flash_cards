@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./FlashCard.css";
 
 export default function FlashCard(props) {
-  const [flipped, setFlipped] = useState(false);
   const { answer, question } = props;
+  const [flipped, setFlipped] = useState(false);
 
   return (
     <>

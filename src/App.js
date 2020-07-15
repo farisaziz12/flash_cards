@@ -8,7 +8,12 @@ function App() {
   const [newCardQuestion, setNewCardQuestion] = useState("");
   const [newCardAnswer, setNewCardAnswer] = useState("");
 
-  const saveNewCard = () => {};
+  const saveNewCard = () => {
+    const flashcard = { question: newCardQuestion, answer: newCardAnswer };
+    setFlashcards([...flashcards, flashcard]);
+    setNewCardQuestion("");
+    setNewCardAnswer("");
+  };
 
   return (
     <>

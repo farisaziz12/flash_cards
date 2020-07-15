@@ -45,6 +45,7 @@ export default function FlashCardCreate(props) {
                   e.preventDefault();
                   //   Once both question and answer are giventhen the object is passed to the parent component
                   saveNewCard();
+                  setShowAnsInput(false);
                 }
           }
           className="done-btn"
