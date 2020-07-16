@@ -54,19 +54,23 @@ function App() {
     );
     const nextCard =
       leftOverCards[Math.floor(Math.random() * leftOverCards.length)];
-    if (nextCard) {
-      if (correct) {
-        setCardsRight([...cardsRight, currentCard.id]);
-        setCurrentCard(nextCard);
-      } else {
-        setCardsWrong([...cardsWrong, currentCard.id]);
+
+    if (correct) {
+      setCardsRight([...cardsRight, currentCard.id]);
+      if (nextCard) {
         setCurrentCard(nextCard);
       }
     } else {
+      setCardsWrong([...cardsWrong, currentCard.id]);
+      if (nextCard) {
+        setCurrentCard(nextCard);
+      }
+    }
+    if (!nextCard) {
       setCardsFinished(true);
     }
   };
-
+  // window alert score
   return (
     <>
       <h1>Flash Cards</h1>
