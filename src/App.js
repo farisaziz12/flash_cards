@@ -68,9 +68,15 @@ function App() {
     }
     if (!nextCard) {
       setCardsFinished(true);
+      window.alert(
+        `You got ${
+          correct ? cardsRight.length + 1 : cardsRight.length
+        } flashcards correct and ${
+          !correct ? cardsWrong.length + 1 : cardsWrong.length
+        } wrong.`
+      );
     }
   };
-  // window alert score
   return (
     <>
       <h1>Flash Cards</h1>
