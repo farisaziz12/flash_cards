@@ -8,11 +8,15 @@ function App() {
   const [newCardQuestion, setNewCardQuestion] = useState("");
   const [newCardAnswer, setNewCardAnswer] = useState("");
   const [testMode, setTestMode] = useState(false);
+  const [cardsWrong, setCardsWrong] = useState([]);
+  const [cardsRight, setCardsRight] = useState([]);
+  const [currentCard, setCurrentCard] = useState(null);
+  const [cardsFinished, setCardsFinished] = useState(false);
 
   useEffect(() => {
     const storedFlashcards = localStorage.getItem("flashcards");
     if (storedFlashcards) {
-      setFlashcards(storedFlashcards);
+      setFlashcards(JSON.parse(storedFlashcards));
     }
   }, []);
 
@@ -33,15 +37,72 @@ function App() {
     );
   };
 
+  const launchTestMode = () => {
+    setTestMode(true);
+    if (flashcards[0]) {
+      const card = flashcards[Math.floor(Math.random() * flashcards.length)];
+      setCurrentCard(card);
+    }
+  };
+
+  const handleFlashCardCorrect = (correct) => {
+    const completedCards = cardsRight.concat(cardsWrong);
+    const leftOverCards = flashcards.filter(
+      (flashcard) =>
+        !completedCards.includes(flashcard.id) && flashcard !== currentCard.id
+    );
+    console.log(leftOverCards);
+    const nextCard =
+      leftOverCards[Math.floor(Math.random() * leftOverCards.length)];
+    if (nextCard) {
+      if (correct) {
+        setCardsRight([...cardsRight, currentCard.id]);
+        setCurrentCard(nextCard);
+      } else {
+        setCardsWrong([...cardsWrong, currentCard.id]);
+        setCurrentCard(nextCard);
+      }
+    } else {
+      setCardsFinished(true);
+    }
+  };
+
   return (
     <>
       <h1>Flash Cards</h1>
-      <button onClick={() => setTestMode(!testMode)}>
+      <button
+        className="btn"
+        onClick={testMode ? () => setTestMode(false) : launchTestMode}
+      >
         {testMode ? "Create" : "Test"}
       </button>
+      <h2>Flascards: {flashcards.length}</h2>
       {testMode ? (
         <>
-          <h2>Flascards: {flashcards.length}</h2>
+          {flashcards[0] && cardsFinished === false ? (
+            <>
+              <h3>Got it right?</h3>
+              <button
+                className="btn"
+                onClick={() => handleFlashCardCorrect(true)}
+              >
+                Yes
+              </button>
+              <button
+                className="btn"
+                onClick={() => handleFlashCardCorrect(false)}
+              >
+                No
+              </button>
+
+              <FlashCard
+                question={currentCard.question}
+                answer={currentCard.answer}
+              />
+            </>
+          ) : (
+            <h2>No Cards</h2>
+          )}
         </>
       ) : (
         <>

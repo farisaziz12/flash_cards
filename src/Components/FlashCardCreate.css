@@ -17,3 +17,9 @@
   color: white;
   background-color: rgb(190, 190, 190);
 }
+
+@media only screen and (max-width: 400px) {
+  .create-flashcard-input {
+    width: 225px;
+  }
+}
