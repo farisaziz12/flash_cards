@@ -49,9 +49,9 @@ function App() {
     const completedCards = cardsRight.concat(cardsWrong);
     const leftOverCards = flashcards.filter(
       (flashcard) =>
-        !completedCards.includes(flashcard.id) && flashcard !== currentCard.id
+        !completedCards.includes(flashcard.id) &&
+        flashcard.id !== currentCard.id
     );
-    console.log(leftOverCards);
     const nextCard =
       leftOverCards[Math.floor(Math.random() * leftOverCards.length)];
     if (nextCard) {
